@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "menu"
+        "buscar"
+        "galeria"
+        "pie-de-pagina";
+}
+
+/* Menu */
+
+.nav {
+    background: #293241;
+    height: 80px;
+    color: #fff;
+    grid-area: menu;
+    padding: 15px;
+}
+
+.nav_container {
+    display: flex;
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav_container > .logo {
+    width: 50px;
+}
+
+.nav_logo {
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+.nav_item {
+    color: #fff;
+    text-decoration: none;
+    --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+}
+
+.nav_menu,
+.nav_input {
+    display: none;
+}
+
+.nav_label {
+    display: block;
+    cursor: pointer;
+}
+
+.nav_menu {
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    background: #f08080;
+    width: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    clip-path: circle(0 at center);
+    transition: clip-path 1s ease-in-out;
+}
+
+.nav_input:checked + .nav_menu {
+    clip-path: circle(100% at center);
+}
+
+/* Buscador */
+
+.buscar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    grid-area: buscar;
+}
+
+.buscar > select {
+    width: 250px;
+    height: 30px;
+    transition: .5s;
+}
+
+/* Galeria */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 3em;
+    padding-top: 1em;
+    grid-area: galeria;
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.card_img > img {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 30px;
+}
+
+.card_img {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card_img::before {
+    content: "Super Anime";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #5b40f3a6;
+    transform: scale(0);
+    transition: transform .8s;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.card_img:hover::before {
+    transform: scale(1) rotate(360deg);
+}
+
+.title {
+    font-size: 2.5rem;
+    padding: .8em 0 .4em;
+}
+
+/* Pie de página */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    padding: 15px;
+    background: #293241;
+    color: #fff;
+    grid-area: pie-de-pagina;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.text {
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.text > span > a {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+/* Media Queries */
+
+@media (min-width: 576px) {
+    body {
+        grid-template-columns: 200px auto;
+        grid-template-areas:
+            "menu buscar"
+            "menu galeria"
+            "menu galeria"
+            "pie-de-pagina pie-de-pagina"
+        ;
+        height: 100vh;
+    }
+}
+
+/* Menú */
+
+@media (min-width: 576px) {
+
+    .nav_label,
+    .nav_input {
+        display: none;
+    }
+
+    .nav {
+        height: 100%;
+    }
+
+    .nav_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .nav_menu {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        clip-path: none;
+        background: none;
+        gap: 50px;
+    }
+
+    .nav_item {
+        --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+    }
+
+    .nav_item::after {
+        content: "";
+        display: block;
+        background: #fff;
+        width: 90%;
+        margin-top: 3px;
+        height: 3px;
+        clip-path: var(--clippy);
+        transition: clip-path .5s;
+    }
+
+    .nav_item:hover {
+        --clippy: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+@media (min-width: 576px) {
+    .gallery {
+        overflow-y: scroll;
+    }
+
+    .card_img > img {
+        display: flex;
+        width: 400px;
+    }
+}
+
+/* Pie de página */
+
+@media (min-width: 576px) {
+    .text {
+        font-size: 15px;
+        font-weight: 400;
+    }
+}
